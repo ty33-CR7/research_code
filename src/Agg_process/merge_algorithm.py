@@ -5,8 +5,8 @@ from scipy.stats import chi2
 def cross_chimerge(
         cross_table: pd.DataFrame,
         max_interval_len: int,
-        p_value: float=0.05,
-        initial_intervals: list[set]=None
+        initial_intervals: list[set]=None,
+        p_value: float=0.05
 )-> list[set]:
     """
     カテゴリ値を χ² マージし、最終的に max_interval_len 個の区間にまとめる。
@@ -34,7 +34,7 @@ def cross_chimerge(
         intervals = [{idx} for idx in cross_table.index]
     else:
         # シャローコピーしておく
-        intervals = [set(s) for s in initial_intervals]
+        intervals = initial_intervals
 
     # 1) χ² 閾値を計算（自由度 df_chi ）
     num_classes = cross_table.shape[1]

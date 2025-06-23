@@ -21,9 +21,9 @@ def Attribute_domain_reconstruction(df,domain_dict):
         value_to_bin = {}
         for i, bin_values in enumerate(domain_dict[column]):
             for val in bin_values:
-                value_to_bin[round(val, 5)] = i  # 小数誤差を防ぐため丸める
+                value_to_bin[val] = i  # 小数誤差を防ぐため丸める
         
-        df_copy[column] = df[column].round(5).map(value_to_bin).fillna(-1).astype(int)
+        df_copy[column] = df[column].map(value_to_bin).fillna(-1).astype(int)
     
     return df_copy
 
@@ -45,9 +45,12 @@ def user_process_train(x_train, y_train, epsilon, domain_dict, selected_columns)
         # ラベルのエンコード + RR
         label_encoder = LabelEncoder()
         y_train_encoded = label_encoder.fit_transform(y_train)
-
-        y_RR_noise_Trans = RRNoiseTransformer(epsilon / (len(selected_columns) + 1))
-        y_train_RR = y_RR_noise_Trans.fit_transform(y_train_encoded)
+        label_domain = {
+    y_train.name: [[int(val)] for val in sorted(np.unique(y_train_encoded))]
+}
+        y_RR_noise_Trans = RRNoiseTransformer(epsilon / (len(selected_columns) + 1),label_domain)
+        y_train_series = pd.Series(y_train_encoded, name=y_train.name)
+        y_train_RR = y_RR_noise_Trans .fit_transform(y_train_series.to_frame()).squeeze()
 
         return x_train_ADR_RR, y_train_RR
 

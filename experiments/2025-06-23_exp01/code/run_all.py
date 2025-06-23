@@ -43,8 +43,8 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
     df=pd.read_csv("../data/processed/discrete_30_adult.csv")
     X=df.drop(["income"],axis=1)
     y=df.loc[:,"income"]  
-    skf = StratifiedKFold(n_splits=10,random_state=42)
-    for fold_index,train_index,test_index in enumerate(skf.split(X,y),start=1):
+    skf = StratifiedKFold(n_splits=10,shuffle=True,random_state=42)
+    for fold_index,(train_index,test_index) in enumerate(skf.split(X,y),start=1):
         x_train, y_train, x_test, y_test = X.loc[train_index],y.loc[train_index],X.loc[test_index],y.loc[test_index]
         x_train, y_train, x_test, y_test = x_train.reset_index(drop=True),y_train.reset_index(drop=True),x_test.reset_index(drop=True),y_test.reset_index(drop=True)
         x_train, x_feature, y_train, y_feature = train_test_split( x_train, y_train, train_size=split_portion,random_state=42)
@@ -62,7 +62,12 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
 
 
             #収集者側の処理
-            file_path=f"../data/external/domain/epsilon{epsilon:.2f}/Fold{fold_index}/{noise_num}/ADR_domain_T_{low_threshold}_L_{max_interval_len}.csv"
+            # 保存パス（ドメイン情報）
+            file_path = os.path.join(
+                BASE_DIR, "..", "data", "external", "domain",
+                f"epsilon{epsilon:.2f}", f"Fold{fold_index}", f"{noise_num}",
+                f"ADR_domain_T_{low_threshold}_L_{max_interval_len}.csv"
+            )
             # 各属性に対して処理を実行
             dict_domain={}
             #各属性のカイ2乗係数の計算結果を格納
@@ -74,8 +79,14 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
                     column_type = "categorical"
                 else:
                     raise ValueError(f"column は 'numerical' または 'categorical' の型で指定してください: {column}")
+                
+                cross_table_path = os.path.join(
+                    BASE_DIR, "..", "data", "external", "dist",
+                    f"epsilon{epsilon:.2f}", f"Fold{fold_index}", f"{noise_num}",
+                    f"{column}_OUE_estimation.csv"
+                )
 
-                cross_table = pd.read_csv(f"../data/external/dist/epsilon{epsilon:.2f}/Fold{fold_index}/{noise_num}/{column}_OUE_estimation.csv",index_col=0)
+                cross_table = pd.read_csv(cross_table_path,index_col=0)
                 result = Attribute_Domain_Reconstruction(
                     cross_table,
                     low_threshold,
@@ -85,7 +96,8 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
                 dict_chi_square[column]=calculate_cramer_chi_statistic(cross_table,result)
                 dict_domain[column]=result
 
-            os.makedirs(f"../data/external/domain/epsilon{epsilon:.2f}/Fold{fold_index}/{noise_num}", exist_ok=True)
+            domain_out_dir = os.path.dirname(file_path)
+            os.makedirs(domain_out_dir, exist_ok=True)
             dict_domain_to_json(dict_domain,file_path)
 
 
@@ -97,7 +109,7 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
 
             #学習フェーズ
             # ユーザの側の処理
-            # ：選択属性に基づいて特徴量を選択し、RRノイズを付与して送信  
+            # ：選択属性に基づいて特徴量を選択し、RRノイズを付与して送信 
             x_train_ADR_RR,y_train_RR=user_process_train(x_train,y_train,epsilon,domain_dict,selected_columns)
 
             #収集者側の処理

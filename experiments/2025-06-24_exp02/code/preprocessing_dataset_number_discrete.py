@@ -20,7 +20,7 @@ def preprocess_wine_quality_data(bins: int = 5):
         数値列を等幅で分割するビンの数。
     """
     raw_path = "../data/raw/wine_quality.csv"
-    output_path = f"../data/processed/discrete_{bins}_label_wine_quality.csv"
+    output_path = "../data/processed"
     os.makedirs(output_path,exist_ok=True)
     df = pd.read_csv(raw_path, index_col=0)
     NUM_COLUMNS=df.select_dtypes('number').columns
@@ -34,8 +34,8 @@ def preprocess_wine_quality_data(bins: int = 5):
     os.makedirs('../data/processed',exist_ok=True)
     with open('../data/processed/domain_dict.json', 'w', encoding='utf-8') as f:
         json.dump(domain_dict, f, ensure_ascii=False, indent=2)
-    df_discrete.to_csv(output_path,index=False)
-    print(f"Saved to: {output_path}")
+    df_discrete.to_csv(f"{output_path}/discrete_{bins}_wine_quality.csv",index=False)
+    print(f"Saved to: {output_path}/discrete_{bins}_wine_quality.csv")
 
 if __name__ == "__main__":
     preprocess_wine_quality_data(bins=30)  # rawから処理

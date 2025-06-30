@@ -53,12 +53,12 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
 
             #ユーザ側の処理        
             with open('../data/processed/domain_dict.json', 'r', encoding='utf-8') as f:
-                domain_dict = json.load(f)
+                original_domain_dict = json.load(f)
                     # 保存ディレクトリ準備
             BASE_DIR = os.path.dirname(os.path.abspath(__file__))
             out_dir = os.path.abspath(os.path.join(BASE_DIR, "..", "data", "external", "dist", f"epsilon{epsilon:.2f}",f"Fold{fold_index}",f"{noise_num}"))
             os.makedirs(out_dir, exist_ok=True)
-            user_process_DR(x_feature,domain_dict,y_feature,epsilon,dimension_number,out_dir)
+            user_process_DR(x_feature,original_domain_dict,y_feature,epsilon,dimension_number,out_dir)
 
 
             #収集者側の処理
@@ -69,7 +69,7 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
                 f"ADR_domain_T_{low_threshold}_L_{max_interval_len}.csv"
             )
             # 各属性に対して処理を実行
-            dict_domain={}
+            decided_dict_domain={}
             #各属性のカイ2乗係数の計算結果を格納
             dict_chi_square={}
             for column in adult_column:
@@ -94,11 +94,11 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
                     column_type
                 )
                 dict_chi_square[column]=calculate_cramer_chi_statistic(cross_table,result)
-                dict_domain[column]=result
+                decided_dict_domain[column]=result
 
             domain_out_dir = os.path.dirname(file_path)
             os.makedirs(domain_out_dir, exist_ok=True)
-            dict_domain_to_json(dict_domain,file_path)
+            dict_domain_to_json(decided_dict_domain,file_path)
 
 
             #特徴量の評価フェーズ（次元削減）
@@ -110,7 +110,7 @@ for epsilon in [5,7,10,12,15,17,20,30,40,50]:
             #学習フェーズ
             # ユーザの側の処理
             # ：選択属性に基づいて特徴量を選択し、RRノイズを付与して送信 
-            x_train_ADR_RR,y_train_RR=user_process_train(x_train,y_train,epsilon,domain_dict,selected_columns)
+            x_train_ADR_RR,y_train_RR=user_process_train(x_train,y_train,epsilon,decided_dict_domain,selected_columns)
 
             #収集者側の処理
             #ユーザから取得したデータを用いて，モデルを作成

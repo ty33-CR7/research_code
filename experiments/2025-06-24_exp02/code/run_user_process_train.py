@@ -36,25 +36,19 @@ def user_process_train(x_train, y_train, epsilon, domain_dict, selected_columns)
 
     # ドメインに従った整数化
     x_train_ADR = Attribute_domain_reconstruction(x_selected, domain_dict)
-
+    # ラベルのエンコード + RR
+    label_encoder = LabelEncoder()
+    y_train_encoded = label_encoder.fit_transform(y_train)
     if epsilon != "no_noise":
         # RRノイズ適用（特徴量）
         X_RR_noise_Trans = RRNoiseTransformer(epsilon / (len(selected_columns) + 1), domain_dict)
-        print(x_train_ADR.head())
         x_train_ADR_RR = X_RR_noise_Trans.fit_transform(x_train_ADR)
-
-        # ラベルのエンコード + RR
-        label_encoder = LabelEncoder()
-        y_train_encoded = label_encoder.fit_transform(y_train)
-        label_domain = {
-    y_train.name: [[int(val)] for val in sorted(np.unique(y_train_encoded))]
-}
+        label_domain = {y_train.name: [[int(val)] for val in sorted(np.unique(y_train_encoded))]}
         y_RR_noise_Trans = RRNoiseTransformer(epsilon / (len(selected_columns) + 1),label_domain)
         y_train_series = pd.Series(y_train_encoded, name=y_train.name)
         y_train_RR = y_RR_noise_Trans .fit_transform(y_train_series.to_frame()).squeeze()
-
         return x_train_ADR_RR, y_train_RR
 
     # ノイズなし処理
-    return x_train_ADR, y_train
+    return x_train_ADR, y_train_encoded
 

@@ -30,7 +30,7 @@ N=5
 split_portion=0.9
 
 for epsilon in [5,7,10,12,15,17,20]: 
-    df=pd.read_csv("../data/processed/discrete_30_label_wine_quality.csv")
+    df=pd.read_csv("../data/processed/discrete_30_wine_quality.csv")
     X=df.drop(["color"],axis=1)
     y=df.loc[:,"color"]  
     skf = StratifiedKFold(n_splits=10,shuffle=True,random_state=42)

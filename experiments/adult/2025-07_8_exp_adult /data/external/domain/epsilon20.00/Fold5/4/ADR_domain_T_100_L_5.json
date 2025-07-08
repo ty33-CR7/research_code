@@ -1,0 +1,366 @@
+{
+  "age": [
+    [
+      18.18,
+      20.65,
+      23.0835,
+      25.5165
+    ],
+    [
+      27.950000000000003,
+      30.3835,
+      32.816500000000005,
+      35.25,
+      37.6835,
+      40.1165
+    ],
+    [
+      42.55,
+      44.98350000000001
+    ],
+    [
+      47.4165,
+      49.85,
+      52.2835,
+      54.7165,
+      57.15,
+      59.5835,
+      62.01649999999999,
+      64.45,
+      66.8835,
+      69.31649999999999,
+      71.75,
+      74.18350000000001,
+      76.6165,
+      79.05,
+      81.48349999999999,
+      83.9165,
+      86.35,
+      88.7835
+    ]
+  ],
+  "workclass": [
+    [
+      " Private"
+    ],
+    [
+      " ?",
+      " Federal-gov",
+      " Never-worked",
+      " Self-emp-inc",
+      " Self-emp-not-inc",
+      " State-gov",
+      " Without-pay"
+    ],
+    [
+      " Local-gov"
+    ]
+  ],
+  "education": [
+    [
+      " Some-college"
+    ],
+    [
+      " HS-grad"
+    ],
+    [
+      " Bachelors"
+    ],
+    [
+      " 10th",
+      " 11th",
+      " 12th",
+      " 1st-4th",
+      " 5th-6th",
+      " 7th-8th",
+      " 9th",
+      " Assoc-acdm",
+      " Assoc-voc",
+      " Doctorate",
+      " Masters",
+      " Preschool",
+      " Prof-school"
+    ]
+  ],
+  "education_num": [
+    [
+      1.2425
+    ],
+    [
+      1.75,
+      2.25,
+      2.75,
+      3.25,
+      3.75,
+      4.25,
+      4.75,
+      5.25,
+      5.75,
+      6.25,
+      6.75,
+      7.25,
+      7.75,
+      8.25,
+      8.75
+    ],
+    [
+      9.25,
+      9.75
+    ],
+    [
+      10.25,
+      10.75,
+      11.25,
+      11.75,
+      12.25,
+      12.75
+    ],
+    [
+      13.25,
+      13.75,
+      14.25,
+      14.75,
+      15.25,
+      15.75
+    ]
+  ],
+  "marital_status": [
+    [
+      " Never-married"
+    ],
+    [
+      " Divorced"
+    ],
+    [
+      " Married-AF-spouse",
+      " Married-spouse-absent",
+      " Separated",
+      " Widowed"
+    ],
+    [
+      " Married-civ-spouse"
+    ]
+  ],
+  "occupation": [
+    [
+      " Other-service"
+    ],
+    [
+      " ?",
+      " Adm-clerical",
+      " Armed-Forces",
+      " Farming-fishing",
+      " Handlers-cleaners",
+      " Machine-op-inspct",
+      " Priv-house-serv",
+      " Protective-serv",
+      " Tech-support"
+    ],
+    [
+      " Craft-repair",
+      " Prof-specialty",
+      " Sales"
+    ],
+    [
+      " Exec-managerial"
+    ],
+    [
+      " Transport-moving"
+    ]
+  ],
+  "relationship": [
+    [
+      " Not-in-family"
+    ],
+    [
+      " Own-child"
+    ],
+    [
+      " Unmarried"
+    ],
+    [
+      " Other-relative",
+      " Wife"
+    ],
+    [
+      " Husband"
+    ]
+  ],
+  "race": [
+    [
+      " Amer-Indian-Eskimo",
+      " Asian-Pac-Islander",
+      " Black",
+      " Other"
+    ],
+    [
+      " White"
+    ]
+  ],
+  "sex": [
+    [
+      " Female"
+    ],
+    [
+      " Male"
+    ]
+  ],
+  "capital_gain": [
+    [
+      1616.6505000000002
+    ],
+    [
+      4999.950000000001,
+      8333.25,
+      11666.55,
+      14999.85,
+      18333.15,
+      21666.45,
+      24999.75,
+      28333.050000000003,
+      31666.35,
+      34999.65,
+      38332.95,
+      41666.25,
+      44999.55,
+      48332.85,
+      51666.15,
+      54999.45,
+      58332.75,
+      61666.05,
+      64999.35,
+      68332.65,
+      71665.95000000001,
+      74999.25,
+      78332.54999999999,
+      81665.85,
+      84999.15,
+      88332.45000000001,
+      91665.75,
+      94999.05,
+      98332.35
+    ]
+  ],
+  "capital_loss": [
+    [
+      70.422
+    ],
+    [
+      217.8,
+      363.0,
+      508.2,
+      653.4,
+      798.6,
+      943.8,
+      1089.0,
+      1234.1999999999998,
+      1379.4,
+      1524.6,
+      1669.8000000000002,
+      1815.0,
+      1960.2,
+      2105.4,
+      2250.6,
+      2395.8,
+      2541.0,
+      2686.2,
+      2831.4,
+      2976.6,
+      3121.8,
+      3267.0,
+      3412.2,
+      3557.4,
+      3702.6,
+      3847.8,
+      3993.0,
+      4138.2,
+      4283.4
+    ]
+  ],
+  "hours_per_week": [
+    [
+      2.5845,
+      5.9,
+      9.1665,
+      12.4335,
+      15.7,
+      18.9665,
+      22.2335,
+      25.5,
+      28.7665,
+      32.033500000000004,
+      35.3,
+      38.566500000000005
+    ],
+    [
+      41.8335,
+      45.1,
+      48.3665
+    ],
+    [
+      51.6335,
+      54.900000000000006,
+      58.1665,
+      61.4335,
+      64.7,
+      67.9665,
+      71.23349999999999,
+      74.5,
+      77.76650000000001,
+      81.0335,
+      84.30000000000001,
+      87.5665,
+      90.8335,
+      94.1,
+      97.3665
+    ]
+  ],
+  "native_country": [
+    [
+      " United-States"
+    ],
+    [
+      " ?",
+      " Cambodia",
+      " Canada",
+      " China",
+      " Columbia",
+      " Cuba",
+      " Dominican-Republic",
+      " Ecuador",
+      " El-Salvador",
+      " England",
+      " France",
+      " Germany",
+      " Greece",
+      " Guatemala",
+      " Haiti",
+      " Holand-Netherlands",
+      " Honduras",
+      " Hong",
+      " Hungary",
+      " India",
+      " Iran",
+      " Ireland",
+      " Italy",
+      " Jamaica",
+      " Japan",
+      " Laos",
+      " Mexico",
+      " Nicaragua",
+      " Outlying-US(Guam-USVI-etc)",
+      " Peru",
+      " Philippines",
+      " Poland",
+      " Portugal",
+      " Puerto-Rico",
+      " Scotland",
+      " South",
+      " Taiwan",
+      " Thailand",
+      " Trinadad&Tobago",
+      " Vietnam",
+      " Yugoslavia"
+    ]
+  ]
+}
